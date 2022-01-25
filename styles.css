@@ -157,6 +157,15 @@ main p {
 	margin-bottom: 20px;
 }
 
+#macro-info {
+	display: flex;
+	justify-content: space-between;
+}
+
+#macro-info div {
+	width: 32%;
+}
+
 .small {
 	font-size: 0.85rem;
 }
