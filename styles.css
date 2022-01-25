@@ -72,6 +72,12 @@ main p {
 	margin: 15px 0;
 }
 
+#recipes-selection select {
+	padding: 8px 5px;
+	font-size: 1rem;
+	border-radius: 3px;
+}
+
 .tip {
 	color: #888;
 	text-align: center;
@@ -81,7 +87,8 @@ main p {
 	display: flex;
 }
 
-#results div > * {
+#pet-food-results,
+#nomnom-results {
 	width: 50%;
 	padding: 0 20px;
 }
@@ -93,6 +100,7 @@ main p {
 
 #pet-food-results {
 	text-align: right;
+	padding-top: 62px;
 }
 
 #pet-food-results img,
@@ -100,6 +108,79 @@ main p {
 	height: 250px;
 }
 
-#pet-food-results .hidden {
+#pet-food-results h4,
+#nomnom-results h4 {
+	font-weight: normal;
+	margin: 10px 0;
+}
+
+#pet-food-results span,
+#nomnom-results span {
+	font-size: 2rem;
+	font-weight: bold;
+	font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
+
+#pet-food-results span {
+	color: #999;
+}
+
+#nomnom-results span:nth-of-type(1) {
+	color: var(--redorange);
+}
+
+#nomnom-results span:nth-of-type(2) {
+	color: var(--pink);
+}
+
+#nomnom-results span:nth-of-type(3) {
+	color: var(--yellow);
+}
+
+#nomnom-results h3 {
+	font-size: 2rem;
+	font-weight: bold;
+	font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+	text-transform: uppercase;
+	color: var(--orange);
+}
+
+#details {
+	color: #888;
+}
+
+#details h3 {
+	font-size: 1.5rem;
+}
+
+#details div {
+	margin-bottom: 20px;
+}
+
+.small {
+	font-size: 0.85rem;
+}
+
+#cta h2 {
+	color: var(--blue);
+	font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+	text-transform: uppercase;
+	font-size: 2rem;
+	margin: 20px 0;
+}
+
+#cta a {
+	padding: 10px 12px;
+	background-color: var(--red);
+	color: white;
+	text-decoration: none;
+	border-radius: 3px;
+}
+
+#cta a:hover {
+	background-color: var(--orange);
+}
+
+.hidden {
 	display: none;
 }
