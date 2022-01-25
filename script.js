@@ -240,6 +240,7 @@ function updateNomNomResults(e) {
 	const imgNomNomLogo = document.createElement("img");
 	imgNomNomLogo.src = "https://www.nomnomnow.com/images/logo/nom_nom_straight.svg";
 	imgNomNomLogo.alt = "NomNom logo";
+	imgNomNomLogo.classList.add("nomnom-logo");
 
 	const h3NomNomRecipeName = document.createElement("h3");
 	h3NomNomRecipeName.innerText = nomNomRecipe.name;
@@ -251,7 +252,7 @@ function updateNomNomResults(e) {
 	const h4ProteinNomNom = document.createElement("h4");
 	const spanProteinNomNom = document.createElement("span");
 
-	h4ProteinNomNom.innerText = "Protein";
+	h4ProteinNomNom.innerText = "Protein *";
 	spanProteinNomNom.innerText = nomNomRecipe.protein;
 
 	const h4FatNomNom = document.createElement("h4");

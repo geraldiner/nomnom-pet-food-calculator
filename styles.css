@@ -77,6 +77,29 @@ main p {
 	text-align: center;
 }
 
-.hidden {
+#results div {
+	display: flex;
+}
+
+#results div > * {
+	width: 50%;
+	padding: 0 20px;
+}
+
+#nomnom-results .nomnom-logo {
+	height: 20px;
+	width: auto;
+}
+
+#pet-food-results {
+	text-align: right;
+}
+
+#pet-food-results img,
+#nomnom-results img {
+	height: 250px;
+}
+
+#pet-food-results .hidden {
 	display: none;
 }
