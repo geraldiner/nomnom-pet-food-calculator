@@ -145,6 +145,8 @@ petFoodSelect.onchange = e => {
 	petFoodBrand = petType === "dog" ? PET_FOOD_BRANDS_DOG[e.target.value] : PET_FOOD_BRANDS_CAT[e.target.value];
 	updatePetFoodResults();
 	updateNomNomResults();
+	document.querySelector("#details").classList.remove("hidden");
+	document.querySelector("#cta").classList.remove("hidden");
 };
 
 // Dropdown menu for selecting the NomNom recipe
@@ -154,6 +156,8 @@ nomNomRecipeSelect.onchange = e => {
 	nomNomRecipe = petType === "dog" ? NOMNOM_RECIPES_DOG[e.target.value] : NOMNOM_RECIPES_CAT[e.target.value];
 	updatePetFoodResults();
 	updateNomNomResults();
+	document.querySelector("#details").classList.remove("hidden");
+	document.querySelector("#cta").classList.remove("hidden");
 };
 
 // Once the window loads, initialize petType to dog (initially checked). Then update the dropdown menus for dog food/recipes.
@@ -275,9 +279,11 @@ function updateNomNomResults(e) {
 
 function resetResults() {
 	const resultsHtml = document.querySelector("#results");
-	resultsHtml.innerHTML = `<p>Select a pet food brand to get a nutrient comparison</p>
+	resultsHtml.innerHTML = `<p class="tip">Select a pet food brand to get a nutrient comparison</p>
   <div>
     <section id="pet-food-results"></section>
     <section id="nomnom-results"></section>
   </div>`;
+	document.querySelector("#details").classList.add("hidden");
+	document.querySelector("#cta").classList.add("hidden");
 }
