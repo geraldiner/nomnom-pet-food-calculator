@@ -2,6 +2,8 @@
 
 ### Project Links
 
+**Live:** https://geraldiner.github.io/nomnom-pet-food-calculator/
+
 ## How It's Made
 
 **Tech used:** HTML, CSS, JavaScript

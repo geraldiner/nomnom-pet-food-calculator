@@ -131,10 +131,10 @@ const petTypeRadioBtns = document.querySelectorAll('input[name="petType"]');
 // EventListener for each radio button to set the current petType to the selected radio button. Then update the selection for pet food brands and NomNom recipes based on the new petType.
 petTypeRadioBtns.forEach(r => {
 	r.addEventListener("click", e => {
-		e.preventDefault();
 		petType = e.target.value;
 		updatePetFoodSelection();
 		updateNomNomSelection();
+		resetResults();
 	});
 });
 
@@ -142,7 +142,6 @@ petTypeRadioBtns.forEach(r => {
 const petFoodSelect = document.querySelector("#pet-food-brand-select");
 // EventListener to change the current petFoodBrand when the user makes a new selection. Then update the results section.
 petFoodSelect.onchange = e => {
-	e.preventDefault();
 	petFoodBrand = petType === "dog" ? PET_FOOD_BRANDS_DOG[e.target.value] : PET_FOOD_BRANDS_CAT[e.target.value];
 	updatePetFoodResults();
 	updateNomNomResults();
@@ -152,9 +151,9 @@ petFoodSelect.onchange = e => {
 const nomNomRecipeSelect = document.querySelector("#nomnom-recipe-select");
 // EventListener to change the current nomNomRecipe when the user makes a new selection. Then update the results section.
 nomNomRecipeSelect.onchange = e => {
-	e.preventDefault();
 	nomNomRecipe = petType === "dog" ? NOMNOM_RECIPES_DOG[e.target.value] : NOMNOM_RECIPES_CAT[e.target.value];
-	updateNomNomResults(e);
+	updatePetFoodResults();
+	updateNomNomResults();
 };
 
 // Once the window loads, initialize petType to dog (initially checked). Then update the dropdown menus for dog food/recipes.
@@ -167,42 +166,25 @@ window.onload = () => {
 // Update the pet food dropdown menu based on the current petType
 function updatePetFoodSelection() {
 	petFoodSelect.innerHTML = `<option value="">Select Pet Food Brand</option>`;
-	if (petType === "dog") {
-		for (let i = 0; i < PET_FOOD_BRANDS_DOG.length; i++) {
-			let option = document.createElement("option");
-			option.value = i;
-			option.innerText = PET_FOOD_BRANDS_DOG[i].name;
-			petFoodSelect.appendChild(option);
-		}
-	} else {
-		for (let i = 0; i < PET_FOOD_BRANDS_CAT.length; i++) {
-			let option = document.createElement("option");
-			option.value = i;
-			option.innerText = PET_FOOD_BRANDS_CAT[i].name;
-			petFoodSelect.appendChild(option);
-		}
-	}
+	let brands = petType === "dog" ? PET_FOOD_BRANDS_DOG : PET_FOOD_BRANDS_CAT;
+	updateSelection(brands, petFoodSelect);
 }
 
 // Update the NomNom dropdown menu based on the current petType
 function updateNomNomSelection() {
 	nomNomRecipeSelect.innerHTML = "";
-	if (petType === "dog") {
-		nomNomRecipe = NOMNOM_RECIPES_DOG[0];
-		for (let i = 0; i < NOMNOM_RECIPES_DOG.length; i++) {
-			let option = document.createElement("option");
-			option.value = i;
-			option.innerText = NOMNOM_RECIPES_DOG[i].name;
-			nomNomRecipeSelect.appendChild(option);
-		}
-	} else {
-		nomNomRecipe = NOMNOM_RECIPES_CAT[0];
-		for (let i = 0; i < NOMNOM_RECIPES_CAT.length; i++) {
-			let option = document.createElement("option");
-			option.value = i;
-			option.innerText = NOMNOM_RECIPES_CAT[i].name;
-			nomNomRecipeSelect.appendChild(option);
-		}
+	let recipes = petType === "dog" ? NOMNOM_RECIPES_DOG : NOMNOM_RECIPES_CAT;
+	nomNomRecipe = recipes[0];
+	updateSelection(recipes, nomNomRecipeSelect);
+}
+
+// Update the given dropdown menu with the given list
+function updateSelection(list, dropdown) {
+	for (let i = 0; i < list.length; i++) {
+		let option = document.createElement("option");
+		option.value = i;
+		option.innerText = list[i].name;
+		dropdown.appendChild(option);
 	}
 }
 
@@ -250,6 +232,14 @@ function updatePetFoodResults() {
 function updateNomNomResults(e) {
 	const nomNomResults = document.querySelector("#nomnom-results");
 	nomNomResults.innerHTML = "";
+
+	const imgNomNomLogo = document.createElement("img");
+	imgNomNomLogo.src = "https://www.nomnomnow.com/images/logo/nom_nom_straight.svg";
+	imgNomNomLogo.alt = "NomNom logo";
+
+	const h3NomNomRecipeName = document.createElement("h3");
+	h3NomNomRecipeName.innerText = nomNomRecipe.name;
+
 	const imgNomNom = document.createElement("img");
 	imgNomNom.src = nomNomRecipe.imgUrl;
 	imgNomNom.alt = `${nomNomRecipe.name} logo`;
@@ -272,6 +262,8 @@ function updateNomNomResults(e) {
 	h4CarbNomNom.innerText = "Carbohydrate";
 	spanCarbNomNom.innerText = nomNomRecipe.carb;
 
+	nomNomResults.appendChild(imgNomNomLogo);
+	nomNomResults.appendChild(h3NomNomRecipeName);
 	nomNomResults.appendChild(imgNomNom);
 	nomNomResults.appendChild(h4ProteinNomNom);
 	nomNomResults.appendChild(spanProteinNomNom);
@@ -279,4 +271,13 @@ function updateNomNomResults(e) {
 	nomNomResults.appendChild(spanFatNomNom);
 	nomNomResults.appendChild(h4CarbNomNom);
 	nomNomResults.appendChild(spanCarbNomNom);
+}
+
+function resetResults() {
+	const resultsHtml = document.querySelector("#results");
+	resultsHtml.innerHTML = `<p>Select a pet food brand to get a nutrient comparison</p>
+  <div>
+    <section id="pet-food-results"></section>
+    <section id="nomnom-results"></section>
+  </div>`;
 }
